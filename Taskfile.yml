@@ -20,7 +20,7 @@ tasks:
     desc: runs the container
     deps: [build]
     cmds:
-      - podman run -t --rm
+      - podman run --rm
         --tmpfs /run
         -e MODULES="fedora-enchilada fedora-epel"
         -e VERBOSE=7
