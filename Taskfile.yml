@@ -1,0 +1,29 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    silent: true
+
+  build:
+    desc: build a container
+    cmds:
+      - podman build -t fedora-mirror -f Containerfile
+    sources:
+      - ./mirror.zsh
+      - ./Containerfile
+
+  run:
+    desc: runs the container
+    deps: [build]
+    cmds:
+      - podman run -t --rm
+        --tmpfs /run
+        -e MODULES="fedora-enchilada fedora-epel"
+        -e VERBOSE=7
+        -e HARDLINK_OPTIMIZE=yes
+        -v ./content:/srv/mirror/content:Z
+        fedora-mirror 
