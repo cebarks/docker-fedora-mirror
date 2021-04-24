@@ -88,7 +88,7 @@ services:
     volumes:
       - content:/srv/mirror/content
   nginx:
-    image: nginx:alpine
+    image: nginx
     ports:
       - "8080:8080"
     volumes:
